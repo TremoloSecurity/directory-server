@@ -21,14 +21,9 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.apache.directory.project</groupId>
-    <artifactId>project</artifactId>
-    <version>45</version>
-    <relativePath />
-  </parent>
 
-  <groupId>org.apache.directory.server</groupId>
+
+  <groupId>com.tremolosecurity.apache.directory.server</groupId>
   <artifactId>apacheds-parent</artifactId>
   <version>2.0.0.AM27-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -108,16 +103,12 @@
   
   <modules>
     <module>i18n</module>
-    <module>all</module>
     <module>jdbm-partition</module>
     <module>mavibot-partition</module>
-    <!--module>lmdb-partition</module-->
-    <!--module>mavibotv2-partition</module-->
     <module>xdbm-partition</module>
     <module>core-shared</module>
     <module>core-api</module>
     <module>interceptors</module>
-    <module>core</module>
     <module>core-annotations</module>
     <module>server-annotations</module>
     <module>core-jndi</module>
@@ -126,27 +117,13 @@
     <module>core-avl</module>
     <module>ldif-partition</module>
     <module>protocol-shared</module>
-    <module>kerberos-codec</module>
-    <module>protocol-ntp</module>
-    <module>protocol-ldap</module>
-    <module>protocol-dhcp</module>
-    <module>protocol-dns</module>
+    <module>protocol-ldap</module>  
     <module>server-integ</module>
     <module>server-config</module>
     <module>service-builder</module>
-    <!--Uncomment to build all in one OSGi bundle-->
-    <!--<module>osgi</module>-->
     <module>server-jndi</module>
-    <module>interceptor-kerberos</module>
-    <module>http-directory-bridge</module>
-    <module>http-integration</module>
-    <module>test-framework</module>
-    <module>ldap-client-test</module>
     <module>service</module>
     <module>wrapper</module>
-    <module>installers-maven-plugin</module>
-    <module>installers</module>
-    <!--module>bulkloader</module-->
     <module>osgi-integ</module>
   </modules>
 
