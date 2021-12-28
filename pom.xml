@@ -109,22 +109,12 @@
     <module>core-shared</module>
     <module>core-api</module>
     <module>interceptors</module>
-    <module>core-annotations</module>
-    <module>server-annotations</module>
-    <module>core-jndi</module>
     <module>core-constants</module>
-    <module>core-integ</module>
     <module>core-avl</module>
     <module>ldif-partition</module>
     <module>protocol-shared</module>
     <module>protocol-ldap</module>  
-    <module>server-integ</module>
     <module>server-config</module>
-    <module>service-builder</module>
-    <module>server-jndi</module>
-    <module>service</module>
-    <module>wrapper</module>
-    <module>osgi-integ</module>
   </modules>
 
 
@@ -384,23 +374,7 @@
           </configuration>
         </plugin>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <configuration>
-            <failOnViolation>true</failOnViolation>
-            <includeTestSourceDirectory>false</includeTestSourceDirectory>
-          </configuration>
-          <executions>
-            <execution>
-              <id>validate</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+        
 
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
         <plugin>
@@ -425,19 +399,7 @@
                     <ignore />
                   </action>
                 </pluginExecution>
-                <pluginExecution>
-                    <pluginExecutionFilter>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
-                        <versionRange>[2.16,)</versionRange>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </pluginExecutionFilter>
-                    <action>
-                        <ignore />
-                    </action>
-                </pluginExecution>
+                
               </pluginExecutions>
             </lifecycleMappingMetadata>
           </configuration>
@@ -462,10 +424,7 @@
     </pluginManagement>
     
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-      </plugin>
+      
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -509,28 +468,7 @@
         </executions>
       </plugin>
 
-      <plugin>
-        <groupId>de.thetaphi</groupId>
-        <artifactId>forbiddenapis</artifactId>
-        <version>${forbiddenapis.version}</version>
-        <configuration>
-          <internalRuntimeForbidden>false</internalRuntimeForbidden>
-          <failOnUnsupportedJava>true</failOnUnsupportedJava>
-          <failOnViolation>true</failOnViolation>
-          <bundledSignatures>
-            <bundledSignature>jdk-unsafe</bundledSignature>
-            <bundledSignature>jdk-deprecated</bundledSignature>
-          </bundledSignatures>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-              <goal>testCheck</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+      
     </plugins>
   </build>
   
@@ -751,11 +689,7 @@
         <version>${project.version}</version>
       </dependency>
       
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>apacheds-kerberos-codec</artifactId>
-        <version>${project.version}</version>
-      </dependency>
+
       
       <dependency>
         <groupId>${project.groupId}</groupId>
