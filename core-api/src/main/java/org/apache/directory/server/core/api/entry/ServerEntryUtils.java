@@ -499,7 +499,18 @@ public final class ServerEntryUtils
                 else
                 {
                     // TODO : handle options
-                    AttributeType attributeType = schemaManager.lookupAttributeTypeRegistry( id );
+                    
+                	AttributeType attributeType = null;
+                	
+                	try {
+                		attributeType = schemaManager.lookupAttributeTypeRegistry( id );
+                	} catch (LdapException e) {
+                		FilteringOperationContext.addAttributeToSchema(id,schemaManager);
+                    	attributeType = schemaManager.lookupAttributeTypeRegistry( id );
+                	}
+                    
+                    
+                    
                     modificationsList.add( toServerModification( modification, attributeType ) );
                 }
             }

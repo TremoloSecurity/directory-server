@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.directory.api.ldap.model.constants.SchemaConstants;
+import org.apache.directory.api.ldap.model.entry.Attribute;
 import org.apache.directory.api.ldap.model.exception.LdapException;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.api.ldap.model.schema.AttributeType;
@@ -313,8 +314,19 @@ public abstract class FilteringOperationContext extends AbstractOperationContext
                     String id = SchemaUtils.stripOptions( returnAttribute );
                     Set<String> options = SchemaUtils.getOptions( returnAttribute );
 
-                    AttributeType attributeType = session.getDirectoryService()
-                        .getSchemaManager().lookupAttributeTypeRegistry( id );
+                    
+                    AttributeType attributeType;
+                    
+                    
+                    try {
+	                    attributeType = session.getDirectoryService()
+	                        .getSchemaManager().lookupAttributeTypeRegistry( id );
+                    } catch (LdapException e) {
+                    	addAttributeToSchema(id,session.getDirectoryService().getSchemaManager());
+                    	attributeType = session.getDirectoryService()
+                                .getSchemaManager().lookupAttributeTypeRegistry( id );
+                    }
+                    
                     AttributeTypeOptions attrOptions = new AttributeTypeOptions( attributeType, options );
 
                     collectedAttributes.add( attrOptions );
@@ -324,6 +336,13 @@ public abstract class FilteringOperationContext extends AbstractOperationContext
                     LOG.warn( "Requested attribute {} does not exist in the schema, it will be ignored",
                         returnAttribute );
                     // Unknown attributes should be silently ignored, as RFC 2251 states
+                	
+                	
+                	
+                	
+                    
+                    
+                	
                 }
             }
         }
@@ -331,6 +350,42 @@ public abstract class FilteringOperationContext extends AbstractOperationContext
         return collectedAttributes;
     }
 
+    
+    public static AttributeType addAttributeToSchema(String attributeName,SchemaManager schemaManager) throws LdapException {
+    	String newOID = generateRandomOID(schemaManager);
+    	AttributeType at = new AttributeType(newOID);
+    	
+    	// base new attributes on uid
+    	AttributeType uidAT = schemaManager.getAttributeType("0.9.2342.19200300.100.1.1");
+    	at.setNames(attributeName);
+    	at.setSyntax(uidAT.getSyntax());
+    	at.setSingleValued(false);
+    	at.setEquality(uidAT.getEquality());
+    	
+    	at.setSubstring(uidAT.getSubstring());
+    	at.setSchemaName(uidAT.getSchemaName());
+    	at.setSpecification(uidAT.getSpecification());
+    	at.setUsage(uidAT.getUsage());
+    	
+    	LOG.warn("Creating dynamic schema entry : '{}' {}", at.getName(), at.getOid());
+    	
+    	schemaManager.add(at);
+    	return at;
+    }
+    
+    public static String generateRandomOID(SchemaManager schemaManager) {
+		String base ="1.2.840.113556.1.4.";
+		int num = (int) (Math.random() * 5000);
+		
+		StringBuffer b = new StringBuffer(base);
+		b.append(num);
+		
+		if (schemaManager.getAttributeType(b.toString()) == null ) {
+			return b.toString();
+		} else {
+			return generateRandomOID(schemaManager);
+		}
+	}
 
     /**
      * @param allOperationalAttributes the allOperationalAttributes to set
