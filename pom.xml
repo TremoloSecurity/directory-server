@@ -48,7 +48,7 @@
     <skin.version>1.0.3</skin.version>
     
     <!-- Set versions for depending jars -->
-    <ant.version>1.10.11</ant.version>
+    <ant.version>1.10.12</ant.version>
     <bcprov.version>1.70</bcprov.version>
     <commons.cli.version>1.5.0</commons.cli.version>
     <commons.codec.version>1.15</commons.codec.version>
@@ -58,12 +58,10 @@
     <commons.net.version>3.8.0</commons.net.version>
     <commons.pool.version>2.11.1</commons.pool.version>
     <dnsjava.version>3.4.3</dnsjava.version>
-    <caffeine.version>2.9.3</caffeine.version>
+    <caffeine.version>3.0.5</caffeine.version>
     <findbugs.annotations.version>1.0.0</findbugs.annotations.version>
     <forbiddenapis.version>2.6</forbiddenapis.version>
-    <jetty.version>9.4.40.v20210413</jetty.version>
-    <!-- The Jetty bundle exports are using version 9.4.5, not 9.4.5.v20170502... -->
-    <jetty.bundle.version>9.4.19</jetty.bundle.version>
+    
     <junit.version>4.13.2</junit.version>
     <junit.engine.version>5.8.2</junit.engine.version>
     <junit.jupiter.version>5.8.2</junit.jupiter.version>
@@ -73,7 +71,7 @@
     <ldapsdk.version>4.1</ldapsdk.version>
     <log4j2.version>2.17.1</log4j2.version>
     <logback.version>1.2.10</logback.version>
-    <maven.version>3.8.1</maven.version>
+    <maven.version>3.8.4</maven.version>
     <mina.core.version>2.1.5</mina.core.version>
     <org.apache.felix.version>7.0.3</org.apache.felix.version>
     <pax-exam.version>4.13.1</pax-exam.version>
@@ -82,19 +80,21 @@
     <slf4j.api.version>1.7.26</slf4j.api.version>
     <slf4j.api.bundleversion>"$«range;[==,=+)»"</slf4j.api.bundleversion>
     <slf4j.log4j12.version>1.7.26</slf4j.log4j12.version>
-    <wagon.ssh.version>3.4.3</wagon.ssh.version>
-    <wagon.ssh.external.version>3.4.3</wagon.ssh.external.version>
+    <wagon.ssh.version>3.5.1</wagon.ssh.version>
+    <wagon.ssh.external.version>3.5.1</wagon.ssh.external.version>
     <wrapper.version>3.5.1</wrapper.version>
   </properties>
 
   <url>https://directory.apache.org/apacheds/1.5</url>
 
   <distributionManagement>
-    <site>
-      <id>apache.directory.apacheds</id>
-      <url>${distMgmtSiteUrl}</url>
-    </site>
-  </distributionManagement>
+		<repository>
+			<id>nexus.tremolo.io</id>
+			<name>tremolo.io-releases</name>
+			<url>s3://tremolosecurity-maven/repository/releases</url>
+		</repository>
+
+	</distributionManagement>
 
   <issueManagement>
     <system>JIRA</system>
@@ -297,8 +297,16 @@
   </reporting>
 
   <build>
+    <extensions>
+			<extension>
+				<groupId>com.gkatzioura.maven.cloud</groupId>
+				<artifactId>s3-storage-wagon</artifactId>
+				<version>2.3</version>
+			</extension>
+		</extensions>
     <pluginManagement>
       <plugins>
+        
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
@@ -1215,11 +1223,7 @@
         <version>${bcprov.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-webapp</artifactId>
-        <version>${jetty.version}</version>
-      </dependency>
+     
     
       <dependency>
         <groupId>findbugs</groupId>
