@@ -21,14 +21,9 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.apache.directory.project</groupId>
-    <artifactId>project</artifactId>
-    <version>45</version>
-    <relativePath />
-  </parent>
 
-  <groupId>org.apache.directory.server</groupId>
+
+  <groupId>com.tremolosecurity.apache.directory.server</groupId>
   <artifactId>apacheds-parent</artifactId>
   <version>2.0.0.AM27-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -53,53 +48,53 @@
     <skin.version>1.0.3</skin.version>
     
     <!-- Set versions for depending jars -->
-    <ant.version>1.10.11</ant.version>
-    <bcprov.version>1.69</bcprov.version>
-    <commons.cli.version>1.4</commons.cli.version>
+    <ant.version>1.10.12</ant.version>
+    <bcprov.version>1.70</bcprov.version>
+    <commons.cli.version>1.5.0</commons.cli.version>
     <commons.codec.version>1.15</commons.codec.version>
     <commons.collections.version>4.4</commons.collections.version>
     <commons.daemon.version>1.2.4</commons.daemon.version>
     <commons.lang.version>3.12.0</commons.lang.version>
     <commons.net.version>3.8.0</commons.net.version>
-    <commons.pool.version>2.9.0</commons.pool.version>
-    <dnsjava.version>2.1.9</dnsjava.version>
-    <caffeine.version>2.7.0</caffeine.version>
+    <commons.pool.version>2.11.1</commons.pool.version>
+    <dnsjava.version>3.4.3</dnsjava.version>
+    <caffeine.version>3.0.5</caffeine.version>
     <findbugs.annotations.version>1.0.0</findbugs.annotations.version>
     <forbiddenapis.version>2.6</forbiddenapis.version>
-    <jetty.version>9.4.40.v20210413</jetty.version>
-    <!-- The Jetty bundle exports are using version 9.4.5, not 9.4.5.v20170502... -->
-    <jetty.bundle.version>9.4.19</jetty.bundle.version>
+    
     <junit.version>4.13.2</junit.version>
-    <junit.engine.version>5.7.2</junit.engine.version>
-    <junit.jupiter.version>5.7.2</junit.jupiter.version>
-    <junit.jupiter.api.version>5.7.2</junit.jupiter.api.version>
-    <junit.platform.version>1.7.2</junit.platform.version>
+    <junit.engine.version>5.8.2</junit.engine.version>
+    <junit.jupiter.version>5.8.2</junit.jupiter.version>
+    <junit.jupiter.api.version>5.8.2</junit.jupiter.api.version>
+    <junit.platform.version>1.8.2</junit.platform.version>
     <kerby.version>2.0.1</kerby.version>
     <ldapsdk.version>4.1</ldapsdk.version>
-    <log4j.version>1.2.17</log4j.version>
-    <logback.version>1.2.3</logback.version>
-    <maven.version>3.8.1</maven.version>
+    <log4j2.version>2.17.1</log4j2.version>
+    <logback.version>1.2.10</logback.version>
+    <maven.version>3.8.4</maven.version>
     <mina.core.version>2.1.5</mina.core.version>
-    <org.apache.felix.version>7.0.1</org.apache.felix.version>
+    <org.apache.felix.version>7.0.3</org.apache.felix.version>
     <pax-exam.version>4.13.1</pax-exam.version>
     <pax-url.version>2.6.2</pax-url.version>
-    <plexus.utils.version>3.3.0</plexus.utils.version>
+    <plexus.utils.version>3.4.1</plexus.utils.version>
     <slf4j.api.version>1.7.26</slf4j.api.version>
     <slf4j.api.bundleversion>"$«range;[==,=+)»"</slf4j.api.bundleversion>
     <slf4j.log4j12.version>1.7.26</slf4j.log4j12.version>
-    <wagon.ssh.version>3.4.3</wagon.ssh.version>
-    <wagon.ssh.external.version>3.4.3</wagon.ssh.external.version>
-    <wrapper.version>3.2.3</wrapper.version>
+    <wagon.ssh.version>3.5.1</wagon.ssh.version>
+    <wagon.ssh.external.version>3.5.1</wagon.ssh.external.version>
+    <wrapper.version>3.5.1</wrapper.version>
   </properties>
 
   <url>https://directory.apache.org/apacheds/1.5</url>
 
   <distributionManagement>
-    <site>
-      <id>apache.directory.apacheds</id>
-      <url>${distMgmtSiteUrl}</url>
-    </site>
-  </distributionManagement>
+		<repository>
+			<id>nexus.tremolo.io</id>
+			<name>tremolo.io-releases</name>
+			<url>s3://tremolosecurity-maven/repository/releases</url>
+		</repository>
+
+	</distributionManagement>
 
   <issueManagement>
     <system>JIRA</system>
@@ -108,46 +103,18 @@
   
   <modules>
     <module>i18n</module>
-    <module>all</module>
     <module>jdbm-partition</module>
     <module>mavibot-partition</module>
-    <!--module>lmdb-partition</module-->
-    <!--module>mavibotv2-partition</module-->
     <module>xdbm-partition</module>
     <module>core-shared</module>
     <module>core-api</module>
     <module>interceptors</module>
-    <module>core</module>
-    <module>core-annotations</module>
-    <module>server-annotations</module>
-    <module>core-jndi</module>
     <module>core-constants</module>
-    <module>core-integ</module>
     <module>core-avl</module>
     <module>ldif-partition</module>
     <module>protocol-shared</module>
-    <module>kerberos-codec</module>
-    <module>protocol-ntp</module>
-    <module>protocol-ldap</module>
-    <module>protocol-dhcp</module>
-    <module>protocol-dns</module>
-    <module>server-integ</module>
+    <module>protocol-ldap</module>  
     <module>server-config</module>
-    <module>service-builder</module>
-    <!--Uncomment to build all in one OSGi bundle-->
-    <!--<module>osgi</module>-->
-    <module>server-jndi</module>
-    <module>interceptor-kerberos</module>
-    <module>http-directory-bridge</module>
-    <module>http-integration</module>
-    <module>test-framework</module>
-    <module>ldap-client-test</module>
-    <module>service</module>
-    <module>wrapper</module>
-    <module>installers-maven-plugin</module>
-    <module>installers</module>
-    <!--module>bulkloader</module-->
-    <module>osgi-integ</module>
   </modules>
 
 
@@ -330,8 +297,16 @@
   </reporting>
 
   <build>
+    <extensions>
+			<extension>
+				<groupId>com.gkatzioura.maven.cloud</groupId>
+				<artifactId>s3-storage-wagon</artifactId>
+				<version>2.3</version>
+			</extension>
+		</extensions>
     <pluginManagement>
       <plugins>
+        
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
@@ -407,23 +382,7 @@
           </configuration>
         </plugin>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <configuration>
-            <failOnViolation>true</failOnViolation>
-            <includeTestSourceDirectory>false</includeTestSourceDirectory>
-          </configuration>
-          <executions>
-            <execution>
-              <id>validate</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+        
 
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
         <plugin>
@@ -448,19 +407,7 @@
                     <ignore />
                   </action>
                 </pluginExecution>
-                <pluginExecution>
-                    <pluginExecutionFilter>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
-                        <versionRange>[2.16,)</versionRange>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </pluginExecutionFilter>
-                    <action>
-                        <ignore />
-                    </action>
-                </pluginExecution>
+                
               </pluginExecutions>
             </lifecycleMappingMetadata>
           </configuration>
@@ -485,10 +432,7 @@
     </pluginManagement>
     
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-      </plugin>
+      
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -532,28 +476,7 @@
         </executions>
       </plugin>
 
-      <plugin>
-        <groupId>de.thetaphi</groupId>
-        <artifactId>forbiddenapis</artifactId>
-        <version>${forbiddenapis.version}</version>
-        <configuration>
-          <internalRuntimeForbidden>false</internalRuntimeForbidden>
-          <failOnUnsupportedJava>true</failOnUnsupportedJava>
-          <failOnViolation>true</failOnViolation>
-          <bundledSignatures>
-            <bundledSignature>jdk-unsafe</bundledSignature>
-            <bundledSignature>jdk-deprecated</bundledSignature>
-          </bundledSignatures>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-              <goal>testCheck</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+      
     </plugins>
   </build>
   
@@ -774,11 +697,7 @@
         <version>${project.version}</version>
       </dependency>
       
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>apacheds-kerberos-codec</artifactId>
-        <version>${project.version}</version>
-      </dependency>
+
       
       <dependency>
         <groupId>${project.groupId}</groupId>
@@ -1206,10 +1125,47 @@
       </dependency>
 
       <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-1.2-api</artifactId>
+			<version>${log4j2.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
       
       <!-- Other dependencies -->
 
@@ -1267,11 +1223,7 @@
         <version>${bcprov.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-webapp</artifactId>
-        <version>${jetty.version}</version>
-      </dependency>
+     
     
       <dependency>
         <groupId>findbugs</groupId>

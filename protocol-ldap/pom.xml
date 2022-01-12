@@ -20,29 +20,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.apache.directory.server</groupId>
+    <groupId>com.tremolosecurity.apache.directory.server</groupId>
     <artifactId>apacheds-parent</artifactId>
     <version>2.0.0.AM27-SNAPSHOT</version>
   </parent>
-  
+
   <artifactId>apacheds-protocol-ldap</artifactId>
   <name>ApacheDS Protocol Ldap</name>
   <packaging>bundle</packaging>
-  
+
   <description>The LDAPv3 protocol provider for ApacheDS</description>
 
   <dependencies>
 
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>apacheds-core</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>apacheds-core-api</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>apacheds-i18n</artifactId>
@@ -64,21 +60,17 @@
       <artifactId>apacheds-jdbm-partition</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>apacheds-kerberos-codec</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-asn1-ber</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-client-api</artifactId>
@@ -86,50 +78,44 @@
 
     <dependency>
       <groupId>org.apache.directory.api</groupId>
-      <artifactId>api-ldap-codec-standalone</artifactId>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-extras-codec-api</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-extras-codec</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-extras-sp</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-extras-util</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-codec-core</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-model</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-ldap-schema-data</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.directory.api</groupId>
       <artifactId>api-util</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.mina</groupId>
       <artifactId>mina-core</artifactId>
@@ -156,7 +142,7 @@
           </execution>
         </executions>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -167,7 +153,7 @@
           </archive>
         </configuration>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
@@ -200,7 +186,6 @@
                 javax.net.ssl,
                 javax.security.auth,
                 javax.security.auth.callback,
-                javax.security.auth.kerberos,
                 javax.security.sasl,
                 jdbm,
                 jdbm.helper,
@@ -259,12 +244,11 @@
                 org.apache.directory.server.core.security;version=${project.version},
                 org.apache.directory.server.core.shared;version=${project.version},
                 org.apache.directory.server.i18n;version=${project.version},
-                org.apache.directory.server.kerberos.shared.store;version=${project.version},
+                
                 org.apache.directory.server.protocol.shared;version=${project.version},
-                org.apache.directory.server.protocol.shared.kerberos;version=${project.version},
+                
                 org.apache.directory.server.protocol.shared.transport;version=${project.version},
-                org.apache.directory.shared.kerberos.codec.types;version=${project.version},
-                org.apache.directory.shared.kerberos.components;version=${project.version},
+                
                 org.apache.mina.core.buffer;version=${mina.core.version},
                 org.apache.mina.core.filterchain;version=${mina.core.version},
                 org.apache.mina.core.future;version=${mina.core.version},
